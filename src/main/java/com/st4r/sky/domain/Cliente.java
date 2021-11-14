@@ -3,6 +3,9 @@ package com.st4r.sky.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.st4r.sky.domain.enums.Perfil;
 import com.st4r.sky.domain.enums.TipoCliente;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 import javax.persistence.*;
@@ -14,6 +17,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
+@Getter @Setter @NoArgsConstructor
 public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,10 +43,6 @@ public class Cliente implements Serializable {
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 
-    public Cliente() {
-        addPerfil(Perfil.CLIENTE);
-    }
-
     public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipoCliente, String senha) {
         super();
         this.id = id;
@@ -52,46 +52,6 @@ public class Cliente implements Serializable {
         this.tipo = (tipoCliente == null) ? null : tipoCliente.getCod();
         this.senha = senha;
         addPerfil(Perfil.CLIENTE);
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getCpfOuCnpj() {
-        return CpfOuCnpj;
-    }
-
-    public void setCpfOuCnpj(String cpfOuCnpj) {
-        CpfOuCnpj = cpfOuCnpj;
-    }
-
-    public TipoCliente getTipo() {
-        return TipoCliente.toEnum(tipo);
-    }
-
-    public void setTipo(TipoCliente tipoCliente) {
-        this.tipo = tipoCliente.getCod();
     }
 
     public List<Endereco> getEnderecos() {
@@ -116,14 +76,6 @@ public class Cliente implements Serializable {
 
     public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
     public Set<Perfil> getPerfis() {
