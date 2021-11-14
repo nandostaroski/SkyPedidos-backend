@@ -1,0 +1,11 @@
+package com.st4r.sky.repositories;
+
+import com.st4r.sky.domain.ItemPedido;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Integer> {
+
+}
+  
